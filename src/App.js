@@ -6,25 +6,32 @@ import Nav from './Nav';
 
 function App() {
 	const [animals, setAnimals] = useState([]);
-	const [animalsList, setAnimalsList] = useState([]);
-	const [animal, setAnimal] = useState('type=dog');
+	const [animal, setAnimal] = useState('dog');
 	const [breed, setBreed] = useState('');
 	const [size, setSize] = useState('');
 	const [gender, setGender] = useState('');
 	const [age, setAge] = useState('');
 	const [name, setName] = useState('');
-	const [location, setLocation] = useState('&location=90034');
+	const [location, setLocation] = useState('90034');
 	const [distance, setDistance] = useState('');
-	const [limit, setLimit] = useState('&limit=25');
+	const [limit, setLimit] = useState('25');
+
+	const [searchAnimal, setSearchAnimal] = useState('type=dog');
+	const [searchBreed, setSearchBreed] = useState('');
+	const [searchSize, setSearchSize] = useState('');
+	const [searchGender, setSearchGender] = useState('');
+	const [searchAge, setSearchAge] = useState('');
+	const [searchName, setSearchName] = useState('');
+	const [searchLocation, setSearchLocation] = useState('&location=90034');
+	const [searchDistance, setSearchDistance] = useState('');
+	const [searchLimit, setSearchLimit] = useState('&limit=25');
+
 
 	const searchOptions = {
-		limit: 25,
-		rating: 'G',
 		api: 'https://api.petfinder.com/v2/',
 		endpoint: 'animals',
-	};
-	let i = 0;
-	let l = 15;
+			};
+
 	const key = 'EHjH5DocMd34RmHnTzQw1sJjrt7irWvSR18MYNt09wkIFFHRch';
 	const secret = 'tfgssIG79q0qcB2I1HwdBicUKMcVR645QH5a1zh5';
 
@@ -33,8 +40,8 @@ function App() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	function getPets() {
-		const url = `${searchOptions.api}${searchOptions.endpoint}?${animal}${breed}${size}${age}${gender}${name}${location}${distance}${limit}`;
+	// function getPets() {
+		const url = `${searchOptions.api}${searchOptions.endpoint}?${searchOptions.animal}${searchOptions.breed}${searchOptions.size}${searchOptions.gender}${searchOptions.age}${searchOptions.name}${searchOptions.location}${searchOptions.distance}${searchOptions.limit}`;
 
 		fetch('https://api.petfinder.com/v2/oauth2/token', {
 			method: 'POST',
@@ -65,7 +72,6 @@ function App() {
 			})
 			.then((data) => {
 				// Log the pet data
-				updateDisplay(data.animals);
 				setAnimals(data.animals);
 			})
 			.catch((err) => {
@@ -74,57 +80,49 @@ function App() {
 			});
 	}
 
-	function updateDisplay(animals) {
-		let tempArray = [];
-		console.log(animals);
-		for (i; i <= l; i++) {
-			tempArray.push(animals[i]);
-			// tempArray[i].photo=['']
-			// tempArray[i].photo.push(animals[i].photo[0])
-		}
-
-		console.log(tempArray);
-		setAnimalsList(tempArray);
-	}
 	function animalSearch(event) {
 		event.preventDefault();
-		setAnimal(`&${event.target.value}`);
+		setAnimal(`${event.target.value}`);setSearchAnimal(`type=${event.target.value}`)
 	}
 	function breedSearch(event) {
 		event.preventDefault();
-		setBreed(`&${event.target.value}`);
+		setBreed(`${event.target.value}`);
+		setSearchBreed(`&breed=${event.target.value}`);
 	}
 	function sizeSearch(event) {
 		event.preventDefault();
-		setSize(`&${event.target.value}`);
+		setSize(`${event.target.value}`);
+		setSearchSize(`&size=${event.target.value}`);
 	}
 	function genderSearch(event) {
 		event.preventDefault();
-		setGender(`&${event.target.value}`);
+		setGender(`${event.target.value}`);
+		setSearchGender(`&gender=${event.target.value}`);
 	}
 	function ageSearch(event) {
 		event.preventDefault();
-		setAge(`&${event.target.value}`);
+		setAge(`${event.target.value}`);setSearchAge(`&age=${event.target.value}`);
 	}
 	function nameSearch(event) {
 		event.preventDefault();
-		setName(`&${event.target.value}`);
+		setName(`${event.target.value}`);setSearchName(`&name=${event.target.value}`);
 	}
 	function locationSearch(event) {
 		event.preventDefault();
-		setLocation(`&${event.target.value}`);
+		setLocation(`${event.target.value}`);
 	}
 	function distanceSearch(event) {
 		event.preventDefault();
-		setDistance(`&${event.target.value}`);
+		setDistance(`${event.target.value}`);setSearchDistance(`&distance=${event.target.value}`);
 	}
 	function limitSearch(event) {
 		event.preventDefault();
-		setLimit(`&${event.target.value}`);
+		setLimit(`${event.target.value}`);setSearchLimit(`&limit=${event.target.value}`);
 	}
 	function handleSubmit(event) {
+		
 		event.preventDefault();
-		// Don't forget to pass the searchString to getImages
+	
 		getPets();
 	}
 
@@ -152,7 +150,7 @@ function App() {
 				limit={limit}
 				handleSubmit={handleSubmit}
 			/>
-			<PetList animalsList={animalsList} />
+			<PetList animals={animals} />
 		</div>
 	);
 }
