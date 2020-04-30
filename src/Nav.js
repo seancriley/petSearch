@@ -25,7 +25,7 @@ function Nav(props) {
 
 	return (
 		<div className='sidebar'>
-			<form onSubmit={handleSubmit} className='form-horizontal'>
+			<form onSubmit={handleSubmit} className='search'>
 				<input
 					placeholder='Animal Type'
 					type='text'
@@ -35,7 +35,7 @@ function Nav(props) {
 					value={animal}
 				/>
 			</form>
-			<form onSubmit={handleSubmit} className='form-horizontal'>
+			<form onSubmit={handleSubmit} className='search'>
 				<input
 					placeholder='Breed Type'
 					type='text'
@@ -45,7 +45,7 @@ function Nav(props) {
 					value={breed}
 				/>
 			</form>
-			<form onSubmit={handleSubmit} className='form-horizontal'>
+			<form onSubmit={handleSubmit} className='search'>
 				<input
 					placeholder='Size'
 					type='text'
@@ -55,7 +55,7 @@ function Nav(props) {
 					value={size}
 				/>
 			</form>
-			<form onSubmit={handleSubmit} className='form-horizontal'>
+			<form onSubmit={handleSubmit} className='search'>
 				<input
 					placeholder='Gender'
 					type='text'
@@ -65,7 +65,7 @@ function Nav(props) {
 					value={gender}
 				/>
 			</form>
-			<form onSubmit={handleSubmit} className='form-horizontal'>
+			<form onSubmit={handleSubmit} className='search'>
 				<input
 					placeholder='Age'
 					type='text'
@@ -75,7 +75,7 @@ function Nav(props) {
 					value={age}
 				/>
 			</form>
-			<form onSubmit={handleSubmit} className='form-horizontal'>
+			<form onSubmit={handleSubmit} className='search'>
 				<input
 					placeholder='Name'
 					type='text'
@@ -85,7 +85,7 @@ function Nav(props) {
 					value={name}
 				/>
 			</form>
-			<form onSubmit={handleSubmit} className='form-horizontal'>
+			<form onSubmit={handleSubmit} className='search'>
 				<input
 					placeholder='Location'
 					type='text'
@@ -95,7 +95,7 @@ function Nav(props) {
 					value={location}
 				/>
 			</form>
-			<form onSubmit={handleSubmit} className='form-horizontal'>
+			<form onSubmit={handleSubmit} className='search'>
 				<input
 					placeholder='Distance'
 					type='text'
@@ -105,7 +105,7 @@ function Nav(props) {
 					value={distance}
 				/>
 			</form>
-			<form onSubmit={handleSubmit} className='form-horizontal'>
+			<form onSubmit={handleSubmit} className='search'>
 				<input
 					placeholder='Search Limit'
 					type='text'

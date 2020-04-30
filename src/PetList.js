@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Pet from './Pet';
 
 const PetList = ({ animals }) => {
