@@ -26,6 +26,7 @@ function Nav(props) {
 	return (
 		<div className='sidebar'>
 			<form onSubmit={handleSubmit} className='search'>
+				Type
 				<input
 					placeholder='Animal Type'
 					type='text'
@@ -36,6 +37,7 @@ function Nav(props) {
 				/>
 			</form>
 			<form onSubmit={handleSubmit} className='search'>
+				Breed
 				<input
 					placeholder='Breed Type'
 					type='text'
@@ -46,8 +48,9 @@ function Nav(props) {
 				/>
 			</form>
 			<form onSubmit={handleSubmit} className='search'>
+				Size
 				<input
-					placeholder='Size'
+					placeholder='Size (small, medium, large)'
 					type='text'
 					name='size'
 					required
@@ -56,6 +59,7 @@ function Nav(props) {
 				/>
 			</form>
 			<form onSubmit={handleSubmit} className='search'>
+				Gender
 				<input
 					placeholder='Gender'
 					type='text'
@@ -66,8 +70,9 @@ function Nav(props) {
 				/>
 			</form>
 			<form onSubmit={handleSubmit} className='search'>
+				Age Group
 				<input
-					placeholder='Age'
+					placeholder='Age (baby, young, adult)'
 					type='text'
 					name='age'
 					required
@@ -76,6 +81,7 @@ function Nav(props) {
 				/>
 			</form>
 			<form onSubmit={handleSubmit} className='search'>
+				Name
 				<input
 					placeholder='Name'
 					type='text'
@@ -86,6 +92,7 @@ function Nav(props) {
 				/>
 			</form>
 			<form onSubmit={handleSubmit} className='search'>
+				Location
 				<input
 					placeholder='Location'
 					type='text'
@@ -96,8 +103,9 @@ function Nav(props) {
 				/>
 			</form>
 			<form onSubmit={handleSubmit} className='search'>
+				Distance Radius
 				<input
-					placeholder='Distance'
+					placeholder='Distance (mi from location)'
 					type='text'
 					name='distance'
 					required
@@ -106,6 +114,7 @@ function Nav(props) {
 				/>
 			</form>
 			<form onSubmit={handleSubmit} className='search'>
+				Search Returns
 				<input
 					placeholder='Search Limit'
 					type='text'
@@ -116,7 +125,7 @@ function Nav(props) {
 				/>
 			</form>
 
-			<button type='submit' onClick={handleSubmit}>
+			<button type='submit' className='button' onClick={handleSubmit}>
 				Search
 			</button>
 		</div>

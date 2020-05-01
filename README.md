@@ -1,4 +1,36 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Description
+
+This project is intended to be a proof of concept, searchable, pet adoption interface.
+
+
+
+
+
+## Technologies Used
+
+- _This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- _HTML, CSS, JS, and React were used.
+- _This code was written with the use of Visual Studio and Chrome
+
+
+## Getting Started
+
+- _The page will load with a default page load for 25 dogs in Los Angles.
+- _After load, results can be searched with the fields on the left.
+- _If additional information is desired on a pet, please click the "More Information" link on the card.
+
+
+## Contribution Guidelines
+
+This project was created for personal learning project. Please feel free to add commented code.
+
+
+
+
+
+
+## React Information
 
 ## Available Scripts
 

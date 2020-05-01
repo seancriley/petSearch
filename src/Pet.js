@@ -2,7 +2,7 @@ import React from 'react';
 
 function Pet(pet) {
 	let imageURL = '';
-
+	//Insert default jpg if no picture is included
 	if (pet.pet.photos[0] === undefined) {
 		imageURL = 'not-available.jpg';
 	} else {
