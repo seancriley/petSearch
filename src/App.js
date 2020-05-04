@@ -5,6 +5,7 @@ import PetList from './PetList';
 import Nav from './Nav';
 
 function App() {
+	//setting state constants
 	const [animals, setAnimals] = useState([]);
 	const [animal, setAnimal] = useState('dog');
 	const [breed, setBreed] = useState('');
@@ -26,23 +27,24 @@ function App() {
 	const [searchDistance, setSearchDistance] = useState('');
 	const [searchLimit, setSearchLimit] = useState('&limit=25');
 
-
+	//search options and API KEY links
 	const searchOptions = {
 		api: 'https://api.petfinder.com/v2/',
 		endpoint: 'animals',
-			};
+	};
 
-	const key = 'EHjH5DocMd34RmHnTzQw1sJjrt7irWvSR18MYNt09wkIFFHRch';
-	const secret = 'tfgssIG79q0qcB2I1HwdBicUKMcVR645QH5a1zh5';
+	const key = process.env.REACT_APP_API_KEY;
+	const secret = process.env.REACT_APP_SECRET_KEY;
 
 	useEffect(() => {
 		getPets();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	// function getPets() {
-		const url = `${searchOptions.api}${searchOptions.endpoint}?${searchOptions.animal}${searchOptions.breed}${searchOptions.size}${searchOptions.gender}${searchOptions.age}${searchOptions.name}${searchOptions.location}${searchOptions.distance}${searchOptions.limit}`;
-
+	function getPets() {
+		//Search URL
+		const url = `${searchOptions.api}${searchOptions.endpoint}?${searchAnimal}${searchBreed}${searchSize}${searchGender}${searchAge}${searchName}${searchLocation}${searchDistance}${searchLimit}`;
+		//Fetch OAUTH token
 		fetch('https://api.petfinder.com/v2/oauth2/token', {
 			method: 'POST',
 			body:
@@ -57,8 +59,7 @@ function App() {
 			.then((response) => response.json())
 
 			.then((data) => {
-				// Return a second API call
-				// This one uses the token we received for authentication
+				// Fetch second API call using token
 				return fetch(url, {
 					headers: {
 						Authorization: data.token_type + ' ' + data.access_token,
@@ -67,7 +68,6 @@ function App() {
 				});
 			})
 			.then((resp) => {
-				// Return the API response as JSON
 				return resp.json();
 			})
 			.then((data) => {
@@ -80,49 +80,95 @@ function App() {
 			});
 	}
 
+	//Search functions
 	function animalSearch(event) {
 		event.preventDefault();
-		setAnimal(`${event.target.value}`);setSearchAnimal(`type=${event.target.value}`)
+		//Set Nav form states
+		setAnimal(`${event.target.value}`);
+		//Set API search states - reset to empty if needed
+		if (event.target.value === '') {
+			setSearchAnimal('');
+		} else {
+			setSearchAnimal(`type=${event.target.value}`);
+		}
 	}
 	function breedSearch(event) {
 		event.preventDefault();
 		setBreed(`${event.target.value}`);
-		setSearchBreed(`&breed=${event.target.value}`);
+		if (event.target.value === '') {
+			setSearchBreed('');
+		} else {
+			setSearchBreed(`&breed=${event.target.value}`);
+		}
 	}
 	function sizeSearch(event) {
 		event.preventDefault();
 		setSize(`${event.target.value}`);
-		setSearchSize(`&size=${event.target.value}`);
+		if (event.target.value === '') {
+			setSearchSize('');
+		} else {
+			setSearchSize(`&size=${event.target.value}`);
+		}
 	}
 	function genderSearch(event) {
 		event.preventDefault();
 		setGender(`${event.target.value}`);
-		setSearchGender(`&gender=${event.target.value}`);
+		if (event.target.value === '') {
+			setSearchGender('');
+		} else {
+			setSearchGender(`&gender=${event.target.value}`);
+		}
 	}
 	function ageSearch(event) {
 		event.preventDefault();
-		setAge(`${event.target.value}`);setSearchAge(`&age=${event.target.value}`);
+		setAge(`${event.target.value}`);
+		if (event.target.value === '') {
+			setSearchAge('');
+		} else {
+			setSearchAge(`&age=${event.target.value}`);
+		}
 	}
 	function nameSearch(event) {
 		event.preventDefault();
-		setName(`${event.target.value}`);setSearchName(`&name=${event.target.value}`);
+		setName(`${event.target.value}`);
+		if (event.target.value === '') {
+			setSearchName('');
+		} else {
+			setSearchName(`&name=${event.target.value}`);
+		}
 	}
 	function locationSearch(event) {
 		event.preventDefault();
 		setLocation(`${event.target.value}`);
+		if (event.target.value === '') {
+			setSearchLocation('');
+		} else {
+			setSearchLocation(`&location=${event.target.value}`);
+		}
 	}
 	function distanceSearch(event) {
 		event.preventDefault();
-		setDistance(`${event.target.value}`);setSearchDistance(`&distance=${event.target.value}`);
+		setDistance(`${event.target.value}`);
+		if (event.target.value === '') {
+			setSearchDistance('');
+		} else {
+			setSearchDistance(`&distance=${event.target.value}`);
+		}
 	}
 	function limitSearch(event) {
 		event.preventDefault();
-		setLimit(`${event.target.value}`);setSearchLimit(`&limit=${event.target.value}`);
+		setLimit(`${event.target.value}`);
+		if (event.target.value === '') {
+			setSearchLimit('');
+		} else {
+			setSearchLimit(`&limit=${event.target.value}`);
+		}
 	}
+
+	//Run new API fetch on search submit
 	function handleSubmit(event) {
-		
 		event.preventDefault();
-	
+
 		getPets();
 	}
 

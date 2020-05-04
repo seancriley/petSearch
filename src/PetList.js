@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Pet from './Pet';
 
 const PetList = ({ animals }) => {
-	// return early if there are no images
+	// return if there are no images
 	if (!animals?.length) {
-		return <h2>No Images Found!</h2>;
+		return <h2 className='pet-grid'>No Images Found!</h2>;
 	}
+	//Map out animals
 	return (
 		<div className='pet-grid'>
 			{animals.map((pet) => (
