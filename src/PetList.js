@@ -6,10 +6,11 @@ const PetList = ({ animalsList }) => {
 	if (!animalsList.length) {
 		return <h2>No Images Found!</h2>;
 	}
-	console.log(animalsList);
 	return (
-		<div className='gallery'>
-			
+		<div className='pet-grid'>
+			{animalsList.map((pet) => (
+				<Pet key={pet.id} pet={pet} />
+			))}
 		</div>
 	);
 };
