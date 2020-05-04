@@ -13,7 +13,7 @@ function App() {
 	const [gender, setGender] = useState('');
 	const [age, setAge] = useState('');
 	const [name, setName] = useState('');
-	const [location, setLocation] = useState('&location=90034');
+	const [location, setLocation] = useState('');
 	const [distance, setDistance] = useState('');
 	const [limit, setLimit] = useState('&limit=25');
 
@@ -65,8 +65,9 @@ function App() {
 			})
 			.then((data) => {
 				// Log the pet data
-				updateDisplay(data.animals);
+updateDisplay(data)
 				setAnimals(data.animals);
+								console.log(data.animals);
 			})
 			.catch((err) => {
 				// Log any errors
@@ -75,83 +76,49 @@ function App() {
 	}
 
 	function updateDisplay(animals) {
-		let tempArray = [];
-		console.log(animals);
+		console.log(animals)
+		console.log(animals[0]);
+		let tempArray = [{}];
 		for (i; i <= l; i++) {
 			tempArray.push(animals[i]);
-			// tempArray[i].photo=['']
-			// tempArray[i].photo.push(animals[i].photo[0])
+			console.log(animals[1]);
 		}
-
 		console.log(tempArray);
 		setAnimalsList(tempArray);
+		
 	}
 	function animalSearch(event) {
-		event.preventDefault();
 		setAnimal(`&${event.target.value}`);
 	}
 	function breedSearch(event) {
-		event.preventDefault();
 		setBreed(`&${event.target.value}`);
 	}
 	function sizeSearch(event) {
-		event.preventDefault();
 		setSize(`&${event.target.value}`);
 	}
 	function genderSearch(event) {
-		event.preventDefault();
 		setGender(`&${event.target.value}`);
 	}
 	function ageSearch(event) {
-		event.preventDefault();
 		setAge(`&${event.target.value}`);
 	}
 	function nameSearch(event) {
-		event.preventDefault();
 		setName(`&${event.target.value}`);
 	}
 	function locationSearch(event) {
-		event.preventDefault();
 		setLocation(`&${event.target.value}`);
 	}
 	function distanceSearch(event) {
-		event.preventDefault();
 		setDistance(`&${event.target.value}`);
 	}
 	function limitSearch(event) {
-		event.preventDefault();
 		setLimit(`&${event.target.value}`);
-	}
-	function handleSubmit(event) {
-		event.preventDefault();
-		// Don't forget to pass the searchString to getImages
-		getPets();
 	}
 
 	return (
 		<div>
 			<Header />
-			<Nav
-				animalSearch={animalSearch}
-				animal={animal}
-				breedSearch={breedSearch}
-				breed={breed}
-				sizeSearch={sizeSearch}
-				size={size}
-				genderSearch={genderSearch}
-				gender={gender}
-				ageSearch={ageSearch}
-				age={age}
-				nameSearch={nameSearch}
-				name={name}
-				locationSearch={locationSearch}
-				location={location}
-				distanceSearch={distanceSearch}
-				distance={distance}
-				limitSearch={limitSearch}
-				limit={limit}
-				handleSubmit={handleSubmit}
-			/>
+			<Nav />
 			<PetList animalsList={animalsList} />
 		</div>
 	);
