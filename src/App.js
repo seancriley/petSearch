@@ -73,7 +73,7 @@ function App() {
 			.then((data) => {
 				// Log the pet data
 				setAnimals(data.animals);
-								console.log(data.animals);
+				console.log(data.animals);
 			})
 			.catch((err) => {
 				// Log any errors

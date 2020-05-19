@@ -64,8 +64,9 @@ function Nav(props) {
 					placeholder='Gender'
 					type='text'
 					name='gender'
-					requiredpull origin master
-
+					requiredpull
+					origin
+					master
 					onChange={genderSearch}
 					value={gender}
 				/>
