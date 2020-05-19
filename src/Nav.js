@@ -1,13 +1,6 @@
 import React from 'react';
 
 function Nav(props) {
-<<<<<<< HEAD
-    return (
-        <div>
-            
-        </div>
-    );
-=======
 	const {
 		animalSearch,
 		animal,
@@ -138,7 +131,6 @@ function Nav(props) {
 			</button>
 		</div>
 	);
->>>>>>> 74980448da123cac6a074b676b928f572cc1c20e
 }
 
 export default Nav;
