@@ -5,28 +5,36 @@ import PetList from './PetList';
 import Nav from './Nav';
 
 function App() {
+	//setting state constants
 	const [animals, setAnimals] = useState([]);
-	const [animalsList, setAnimalsList] = useState([]);
-	const [animal, setAnimal] = useState('type=dog');
+	const [animal, setAnimal] = useState('dog');
 	const [breed, setBreed] = useState('');
 	const [size, setSize] = useState('');
 	const [gender, setGender] = useState('');
 	const [age, setAge] = useState('');
 	const [name, setName] = useState('');
-	const [location, setLocation] = useState('');
+	const [location, setLocation] = useState('90034');
 	const [distance, setDistance] = useState('');
-	const [limit, setLimit] = useState('&limit=25');
+	const [limit, setLimit] = useState('25');
 
+	const [searchAnimal, setSearchAnimal] = useState('type=dog');
+	const [searchBreed, setSearchBreed] = useState('');
+	const [searchSize, setSearchSize] = useState('');
+	const [searchGender, setSearchGender] = useState('');
+	const [searchAge, setSearchAge] = useState('');
+	const [searchName, setSearchName] = useState('');
+	const [searchLocation, setSearchLocation] = useState('&location=90034');
+	const [searchDistance, setSearchDistance] = useState('');
+	const [searchLimit, setSearchLimit] = useState('&limit=25');
+
+	//search options and API KEY links
 	const searchOptions = {
-		limit: 25,
-		rating: 'G',
 		api: 'https://api.petfinder.com/v2/',
 		endpoint: 'animals',
 	};
-	let i = 0;
-	let l = 15;
-	const key = 'EHjH5DocMd34RmHnTzQw1sJjrt7irWvSR18MYNt09wkIFFHRch';
-	const secret = 'tfgssIG79q0qcB2I1HwdBicUKMcVR645QH5a1zh5';
+
+	const key = process.env.REACT_APP_API_KEY;
+	const secret = process.env.REACT_APP_SECRET_KEY;
 
 	useEffect(() => {
 		getPets();
@@ -34,8 +42,9 @@ function App() {
 	}, []);
 
 	function getPets() {
-		const url = `${searchOptions.api}${searchOptions.endpoint}?${animal}${breed}${size}${age}${gender}${name}${location}${distance}${limit}`;
-
+		//Search URL
+		const url = `${searchOptions.api}${searchOptions.endpoint}?${searchAnimal}${searchBreed}${searchSize}${searchGender}${searchAge}${searchName}${searchLocation}${searchDistance}${searchLimit}`;
+		//Fetch OAUTH token
 		fetch('https://api.petfinder.com/v2/oauth2/token', {
 			method: 'POST',
 			body:
@@ -50,8 +59,7 @@ function App() {
 			.then((response) => response.json())
 
 			.then((data) => {
-				// Return a second API call
-				// This one uses the token we received for authentication
+				// Fetch second API call using token
 				return fetch(url, {
 					headers: {
 						Authorization: data.token_type + ' ' + data.access_token,
@@ -60,12 +68,10 @@ function App() {
 				});
 			})
 			.then((resp) => {
-				// Return the API response as JSON
 				return resp.json();
 			})
 			.then((data) => {
 				// Log the pet data
-updateDisplay(data)
 				setAnimals(data.animals);
 								console.log(data.animals);
 			})
@@ -75,51 +81,123 @@ updateDisplay(data)
 			});
 	}
 
-	function updateDisplay(animals) {
-		console.log(animals)
-		console.log(animals[0]);
-		let tempArray = [{}];
-		for (i; i <= l; i++) {
-			tempArray.push(animals[i]);
-			console.log(animals[1]);
-		}
-		console.log(tempArray);
-		setAnimalsList(tempArray);
-		
-	}
+	//Search functions
 	function animalSearch(event) {
-		setAnimal(`&${event.target.value}`);
+		event.preventDefault();
+		//Set Nav form states
+		setAnimal(`${event.target.value}`);
+		//Set API search states - reset to empty if needed
+		if (event.target.value === '') {
+			setSearchAnimal('');
+		} else {
+			setSearchAnimal(`type=${event.target.value}`);
+		}
 	}
 	function breedSearch(event) {
-		setBreed(`&${event.target.value}`);
+		event.preventDefault();
+		setBreed(`${event.target.value}`);
+		if (event.target.value === '') {
+			setSearchBreed('');
+		} else {
+			setSearchBreed(`&breed=${event.target.value}`);
+		}
 	}
 	function sizeSearch(event) {
-		setSize(`&${event.target.value}`);
+		event.preventDefault();
+		setSize(`${event.target.value}`);
+		if (event.target.value === '') {
+			setSearchSize('');
+		} else {
+			setSearchSize(`&size=${event.target.value}`);
+		}
 	}
 	function genderSearch(event) {
-		setGender(`&${event.target.value}`);
+		event.preventDefault();
+		setGender(`${event.target.value}`);
+		if (event.target.value === '') {
+			setSearchGender('');
+		} else {
+			setSearchGender(`&gender=${event.target.value}`);
+		}
 	}
 	function ageSearch(event) {
-		setAge(`&${event.target.value}`);
+		event.preventDefault();
+		setAge(`${event.target.value}`);
+		if (event.target.value === '') {
+			setSearchAge('');
+		} else {
+			setSearchAge(`&age=${event.target.value}`);
+		}
 	}
 	function nameSearch(event) {
-		setName(`&${event.target.value}`);
+		event.preventDefault();
+		setName(`${event.target.value}`);
+		if (event.target.value === '') {
+			setSearchName('');
+		} else {
+			setSearchName(`&name=${event.target.value}`);
+		}
 	}
 	function locationSearch(event) {
-		setLocation(`&${event.target.value}`);
+		event.preventDefault();
+		setLocation(`${event.target.value}`);
+		if (event.target.value === '') {
+			setSearchLocation('');
+		} else {
+			setSearchLocation(`&location=${event.target.value}`);
+		}
 	}
 	function distanceSearch(event) {
-		setDistance(`&${event.target.value}`);
+		event.preventDefault();
+		setDistance(`${event.target.value}`);
+		if (event.target.value === '') {
+			setSearchDistance('');
+		} else {
+			setSearchDistance(`&distance=${event.target.value}`);
+		}
 	}
 	function limitSearch(event) {
-		setLimit(`&${event.target.value}`);
+		event.preventDefault();
+		setLimit(`${event.target.value}`);
+		if (event.target.value === '') {
+			setSearchLimit('');
+		} else {
+			setSearchLimit(`&limit=${event.target.value}`);
+		}
+	}
+
+	//Run new API fetch on search submit
+	function handleSubmit(event) {
+		event.preventDefault();
+
+		getPets();
 	}
 
 	return (
 		<div>
 			<Header />
-			<Nav />
-			<PetList animalsList={animalsList} />
+			<Nav
+				animalSearch={animalSearch}
+				animal={animal}
+				breedSearch={breedSearch}
+				breed={breed}
+				sizeSearch={sizeSearch}
+				size={size}
+				genderSearch={genderSearch}
+				gender={gender}
+				ageSearch={ageSearch}
+				age={age}
+				nameSearch={nameSearch}
+				name={name}
+				locationSearch={locationSearch}
+				location={location}
+				distanceSearch={distanceSearch}
+				distance={distance}
+				limitSearch={limitSearch}
+				limit={limit}
+				handleSubmit={handleSubmit}
+			/>
+			<PetList animals={animals} />
 		</div>
 	);
 }
